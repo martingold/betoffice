@@ -11,7 +11,7 @@ class IndexController(private val userRepository: UserRepository) {
 
 	@GetMapping("/")
 	fun index(model: Model): String {
-		model.addAttribute("user", userRepository.findByUsername("týna"))
+		model.addAttribute("user", userRepository.findByUsername("tyna"))
 		return "index"
 	}
 
@@ -25,6 +25,11 @@ class IndexController(private val userRepository: UserRepository) {
 		return "login"
 	}
 
+	@GetMapping("/logout")
+	fun logout(model: Model): String {
+		return "logout"
+	}
+
 	@GetMapping("/bet")
 	fun bet(model: Model): String {
 		return "bet"
@@ -34,5 +39,4 @@ class IndexController(private val userRepository: UserRepository) {
 	fun profile(model: Model): String {
 		return "profile"
 	}
-
 }

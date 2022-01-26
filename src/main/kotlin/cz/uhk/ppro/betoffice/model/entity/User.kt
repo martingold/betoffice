@@ -12,5 +12,11 @@ class User(
 	var username: String? = null,
 	var password: String? = null,
 	var email: String? = null,
+	var role: String? = null,
 	var createdAt: LocalDateTime = LocalDateTime.now(),
-)
+) {
+	companion object {
+		const val ROLE_USER = "user"
+		const val ROLE_ADMIN = "admin"
+	}
+}
