@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registrovat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link media="all" rel="stylesheet" th:href="@{/css/login.css}" type="text/css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="card">
+                <form th:action="@{/registration}" th:object="${user}" method="post" class="box">
+                    <h1>Registrovat se</h1>
+                    <p class="text-muted">Vlo?te u?ivatelské jméno a heslo</p>
+                    <input type="email" th:field="*{email}" placeholder="Email" required>
+                    <input type="text" th:field="*{username}" placeholder="Username" required>
+                    <input type="password" th:field="*{password}" placeholder="Password" required>
+                    <a class="forgot text-muted" th:href="@{/login}">Máte ji? ú?et? P?ihlásit se</a>
+                    <input type="submit" name="login-submit" value="Registrovat se">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

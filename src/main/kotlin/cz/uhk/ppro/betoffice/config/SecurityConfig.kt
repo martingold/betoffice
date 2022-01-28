@@ -44,12 +44,14 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 					"/js/**");
 	}
 
+	//TODO - vylepšit práva + redirect po přihlášení
 	override fun configure(http: HttpSecurity) {
 		System.out.println(passwordEncoder!!.encode("tyna"));
-		http
+		http.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/login").anonymous()
-			.anyRequest().authenticated()
+			.antMatchers("/user").authenticated()
+			.anyRequest().permitAll()
 			.and()
 			.formLogin()
 			.loginPage("/login")
