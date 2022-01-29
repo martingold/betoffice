@@ -1,11 +1,8 @@
 package cz.uhk.ppro.betoffice.model.entity
 
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.ManyToOne
+import javax.persistence.*
 
 @Entity
 class User(
@@ -18,7 +15,10 @@ class User(
     var firstName: String? = null,
     var lastName: String? = null,
     var birthDate: Date? = null,
-    var amount: Int? = null
+    var amount: Int? = null,
+
+    @OneToMany
+    var bet: List<Bet>? = null
 ) {
 	companion object {
 		const val ROLE_USER = "user"
