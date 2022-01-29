@@ -1,10 +1,7 @@
 package cz.uhk.ppro.betoffice.model.entity
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.OneToOne
+import javax.persistence.*
 
 @Entity
 class Match(
@@ -21,6 +18,10 @@ class Match(
     var result: String? = null,
 
     @OneToOne
-    var stream: Stream? = null
+    var stream: Stream? = null,
+
+    @ManyToMany
+    var Bet: List<Bet>? = null
+
     )
 

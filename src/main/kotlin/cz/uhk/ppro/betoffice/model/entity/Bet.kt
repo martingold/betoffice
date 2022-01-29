@@ -1,16 +1,13 @@
 package cz.uhk.ppro.betoffice.model.entity
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 @Entity
 class Bet(
     @Id @GeneratedValue var id: Long? = null,
 
-    @OneToMany
+    @ManyToMany
     var match: List<Match>? = null,
 
     var startDate: Date? = null,
