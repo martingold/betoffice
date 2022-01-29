@@ -22,7 +22,11 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
 			username = userDto.username,
 			email = userDto.email,
 			password = passwordEncoder!!.encode(userDto.password),
-			role = User.ROLE_USER
+			role = User.ROLE_USER,
+			firstName = userDto.firstName,
+			lastName = userDto.lastName,
+			birthDate = userDto.birthDate,
+			amount = userDto.amount
 		)
 		return userRepository.save(user)
 	}

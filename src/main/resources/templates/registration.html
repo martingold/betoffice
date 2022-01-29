@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Registrovat</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -12,11 +12,21 @@
             <div class="card">
                 <form th:action="@{/registration}" th:object="${user}" method="post" class="box">
                     <h1>Registrovat se</h1>
-                    <p class="text-muted">Vlo?te u?ivatelsk� jm�no a heslo</p>
+                    <p class="text-muted">Vložte prosím následující údaje</p>
+                    <input type="text" th:field="*{firstName}" placeholder="Jméno" required>
+                    <input type="text" th:field="*{lastName}" placeholder="Příjmení" required>
                     <input type="email" th:field="*{email}" placeholder="Email" required>
-                    <input type="text" th:field="*{username}" placeholder="Username" required>
-                    <input type="password" th:field="*{password}" placeholder="Password" required>
-                    <a class="forgot text-muted" th:href="@{/login}">M�te ji? �?et? P?ihl�sit se</a>
+                    <input type="text" th:field="*{username}" placeholder="Uživatelské jméno" required>
+                    <input type="password" th:field="*{password}" placeholder="Heslo" required>
+                    <div class="label">
+                        <label class="text-muted">Datum narození</label>
+                        <input type="date" class="text-white" th:field="*{birthDate}" placeholder="Datum narození" required>
+                    </div>
+                    <div class="label">
+                        <label class="text-muted">Souhlasím se zpracováním osobních údajů</label>
+                        <input type="checkbox" required>
+                    </div>
+                    <a class="forgot text-muted" th:href="@{/login}">Máte již účet? Přihlásit se</a>
                     <input type="submit" name="login-submit" value="Registrovat se">
                 </form>
             </div>

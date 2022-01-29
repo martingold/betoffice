@@ -3,17 +3,22 @@ package cz.uhk.ppro.betoffice.model.entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import java.time.LocalDateTime
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 
 @Entity
 class User(
-	@Id @GeneratedValue var id: Long? = null,
-	var username: String? = null,
-	var password: String? = null,
-	var email: String? = null,
-	var role: String? = null,
-	var createdAt: LocalDateTime = LocalDateTime.now(),
+    @Id @GeneratedValue var id: Long? = null,
+    var username: String? = null,
+    var password: String? = null,
+    var email: String? = null,
+    var role: String? = null,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+    var firstName: String? = null,
+    var lastName: String? = null,
+    var birthDate: Date? = null,
+    var amount: Int? = null
 ) {
 	companion object {
 		const val ROLE_USER = "user"

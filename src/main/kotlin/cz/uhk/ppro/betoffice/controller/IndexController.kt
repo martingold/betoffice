@@ -8,6 +8,10 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.Locale
 
 
 @Controller
@@ -23,11 +27,6 @@ class IndexController(private val userRepository: UserRepository) {
 		return "index"
 	}
 
-	@GetMapping("/user/matches")
-	fun matchesList(model: Model): String {
-		return "matchesList"
-	}
-
 	@GetMapping("/login")
 	fun login(model: Model): String {
 		model.addAttribute("user", userRepository.findByUsername("tyna"))
@@ -37,11 +36,6 @@ class IndexController(private val userRepository: UserRepository) {
 	@GetMapping("/user/logout")
 	fun logout(model: Model): String {
 		return "logout"
-	}
-
-	@GetMapping("/user/bet")
-	fun bet(model: Model): String {
-		return "bet"
 	}
 
 	@GetMapping("/user/profile")
@@ -56,13 +50,21 @@ class IndexController(private val userRepository: UserRepository) {
 	}
 
 	@PostMapping("/registration")
-	fun processRegister(user: User, bindingResult: BindingResult): String? {
+	fun processRegister(@RequestParam("birthDate") date: String, user: User, bindingResult: BindingResult): String? {
 		val passwordEncoder = BCryptPasswordEncoder()
 		val encodedPassword = passwordEncoder.encode(user.password)
 		user.password = encodedPassword
 		user.role = User.ROLE_USER
+		user.birthDate = parseDate(date)
+		user.amount = 200
+		System.out.println(user.birthDate)
 		//todo kontrola existujícího emailu
 		userRepository.save(user)
 		return "homepage"
+	}
+
+	private fun parseDate(date: String): Date {
+		val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+		return formatter.parse(date)
 	}
 }
