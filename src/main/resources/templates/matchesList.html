@@ -12,7 +12,7 @@
 	<div class="container" id="main">
 		<div class="row">
 			<div class="col-sm-8" id="detail">
-				<h2 id="shawn"><b>Fotbal</b></h2>
+				<h2 id="shawn"><b>Zápasy</b></h2>
 			</div>
 		</div>
 		<table class="table" th:each="match : ${matches}">
@@ -26,7 +26,6 @@
 			</tr>
 			</thead>
 			<tbody>
-			<th:if></th:if>
 			<tr>
 				<td th:text="${match.date}"></td>
 				<td th:text="${match.description}"></td>
@@ -40,3 +39,4 @@
 </section>
 </body>
 </html>
+

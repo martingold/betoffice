@@ -1,14 +1,17 @@
 package cz.uhk.ppro.betoffice.controller
 
+import cz.uhk.ppro.betoffice.model.repository.MatchRepository
+import cz.uhk.ppro.betoffice.model.repository.TeamRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class TeamController {
+class TeamController(private val teamRepository: TeamRepository) {
 
-    @GetMapping("/user/team")
+    @GetMapping("/user/teams")
     fun bet(model: Model): String {
-        return "team"
+        model.addAttribute("teams", teamRepository.findAll())
+        return "teamList"
     }
 }
