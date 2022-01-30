@@ -6,16 +6,17 @@
 	<title>Zápasy</title>
 </head>
 <body>
+
 <section layout:fragment="content">
 	<h1 class="h1">Všechny zápasy</h1>
 
-	<div class="container" id="main">
+	<div class="container" id="main" th:if="${!football.isEmpty()}">
 		<div class="row">
 			<div class="col-sm-8" id="detail">
-				<h2 id="shawn"><b>Zápasy</b></h2>
+				<h2 id="shawn"><b>Fotbal</b></h2>
 			</div>
 		</div>
-		<table class="table" th:each="match : ${matches}">
+		<table class="table">
 			<thead>
 			<tr>
 				<td>Datum</td>
@@ -26,7 +27,63 @@
 			</tr>
 			</thead>
 			<tbody>
+			<tr th:each="football : ${football}">
+				<td th:text="${football.date}"></td>
+				<td th:text="${football.description}"></td>
+				<td th:text="${football.team1.name}"></td>
+				<td th:text="${football.team2.name}"></td>
+				<td th:text="${football.result}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container" id="main" th:if="${!hockey.isEmpty()}">
+		<div class="row">
+			<div class="col-sm-8" id="detail">
+				<h2 id="shawn"><b>Hokej</b></h2>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
 			<tr>
+				<td>Datum</td>
+				<td>#</td>
+				<td>Tým 1</td>
+				<td>Tým 2</td>
+				<td>Výsledek</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="hockey : ${hockey}">
+				<td th:text="${hockey.date}"></td>
+				<td th:text="${hockey.description}"></td>
+				<td th:text="${hockey.team1.name}"></td>
+				<td th:text="${hockey.team2.name}"></td>
+				<td th:text="${hockey.result}"></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container" id="main" th:if="${!others.isEmpty()}">
+		<div class="row">
+			<div class="col-sm-8" id="detail">
+				<h2 id="shawn"><b>Ostatní</b></h2>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+			<tr>
+				<td>Datum</td>
+				<td>#</td>
+				<td>Tým 1</td>
+				<td>Tým 2</td>
+				<td>Výsledek</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="match : ${others}">
 				<td th:text="${match.date}"></td>
 				<td th:text="${match.description}"></td>
 				<td th:text="${match.team1.name}"></td>
@@ -36,7 +93,7 @@
 			</tbody>
 		</table>
 	</div>
+	</div>
 </section>
 </body>
 </html>
-

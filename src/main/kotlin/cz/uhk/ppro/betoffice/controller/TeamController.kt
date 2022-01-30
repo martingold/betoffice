@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class TeamController(private val teamRepository: TeamRepository) {
 
-    @GetMapping("/user/teams")
+    @GetMapping("/teams")
     fun bet(model: Model): String {
         model.addAttribute("teams", teamRepository.findAll())
         return "teamList"

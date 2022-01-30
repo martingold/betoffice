@@ -15,7 +15,7 @@
                 <h2 id="shawn"><b>Týmy</b></h2>
             </div>
         </div>
-        <table class="table" th:each="team : ${teams}">
+        <table class="table">
             <thead>
             <tr>
                 <td>Jméno</td>
@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr th:each="team : ${teams}">
                 <td th:text="${team.name}"></td>
                 <td th:text="${team.wins}"></td>
                 <td th:text="${team.loses}"></td>

@@ -21,7 +21,21 @@ class MatchController(
 
     @GetMapping("/matches")
     fun matchesList(model: Model): String {
-        model.addAttribute("matches", matchRepository.findAll())
+        val matches: Iterable<Match> = matchRepository.findAll()
+        val football: MutableList<Match> = mutableListOf()
+        val hockey: MutableList<Match> = mutableListOf()
+        val others: MutableList<Match> = mutableListOf()
+        matches.forEach{
+            if (it.description == "Fotbal")
+                football.add(it)
+            else if (it.description == "Hokej")
+                hockey.add(it)
+            else
+                others.add(it)
+        }
+        model.addAttribute("football", football)
+        model.addAttribute("hockey", hockey)
+        model.addAttribute("others", others)
         return "matchesList"
     }
 
