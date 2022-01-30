@@ -6,15 +6,15 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
 
 @Controller
-class MatchController(private val matchRepository: MatchRepository) {
+class MatchController(
+    private val matchRepository: MatchRepository,
+    private val teamRepository: MatchRepository
+) {
 
     @GetMapping("/user/matches")
     fun matchesList(model: Model): String {
@@ -30,6 +30,7 @@ class MatchController(private val matchRepository: MatchRepository) {
         }
         model.addAttribute("match", match.get());
         model.addAttribute("create", false);
+        model.addAttribute("teams", teamRepository.findAll());
         return "matchForm"
     }
 
@@ -37,11 +38,12 @@ class MatchController(private val matchRepository: MatchRepository) {
     fun editMatch(model: Model): String {
         model.addAttribute("match", Match());
         model.addAttribute("create", true);
+        model.addAttribute("teams", teamRepository.findAll());
         return "matchForm"
     }
 
     @PostMapping("/save-match")
-    fun processSignup(match: Match, bindingResult: BindingResult): String? {
+    fun processSignup(@ModelAttribute("match") match: Match , bindingResult: BindingResult): String? {
         matchRepository.save(match)
         return "/matches"
     }
