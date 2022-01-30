@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Locale
 
-
 @Controller
 class IndexController(private val userRepository: UserRepository) {
 
@@ -22,7 +21,7 @@ class IndexController(private val userRepository: UserRepository) {
 		return "homepage"
 	}
 
-	@GetMapping("/user/")
+	@GetMapping("/user")
 	fun index(model: Model): String {
 		return "index"
 	}
@@ -43,14 +42,14 @@ class IndexController(private val userRepository: UserRepository) {
 		return "profile"
 	}
 
-	@GetMapping("/registration")
-	fun showRegistrationForm(model: Model): String {
+	@GetMapping("/signup")
+	fun showSignupForm(model: Model): String {
 		model.addAttribute("user", User())
-		return "registration"
+		return "signup"
 	}
 
-	@PostMapping("/registration")
-	fun processRegister(@RequestParam("birthDate") date: String, user: User, bindingResult: BindingResult): String? {
+	@PostMapping("/signup")
+	fun processSignup(@RequestParam("birthDate") date: String, user: User, bindingResult: BindingResult): String? {
 		val passwordEncoder = BCryptPasswordEncoder()
 		val encodedPassword = passwordEncoder.encode(user.password)
 		user.password = encodedPassword
