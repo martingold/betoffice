@@ -2,6 +2,7 @@ package cz.uhk.ppro.betoffice.controller
 
 import cz.uhk.ppro.betoffice.model.entity.Match
 import cz.uhk.ppro.betoffice.model.repository.MatchRepository
+import cz.uhk.ppro.betoffice.model.repository.TeamRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -13,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException
 @Controller
 class MatchController(
     private val matchRepository: MatchRepository,
-    private val teamRepository: MatchRepository
+    private val teamRepository: TeamRepository
 ) {
 
     @GetMapping("/user/matches")
