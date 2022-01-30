@@ -1,8 +1,10 @@
 package cz.uhk.ppro.betoffice.controller
 
+import cz.uhk.ppro.betoffice.dto.MatchDto
 import cz.uhk.ppro.betoffice.model.entity.Match
 import cz.uhk.ppro.betoffice.model.repository.MatchRepository
 import cz.uhk.ppro.betoffice.model.repository.TeamRepository
+import cz.uhk.ppro.betoffice.util.DateUtils
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -17,7 +19,7 @@ class MatchController(
     private val teamRepository: TeamRepository
 ) {
 
-    @GetMapping("/user/matches")
+    @GetMapping("/matches")
     fun matchesList(model: Model): String {
         model.addAttribute("matches", matchRepository.findAll())
         return "matchesList"
@@ -44,9 +46,16 @@ class MatchController(
     }
 
     @PostMapping("/save-match")
-    fun processSignup(@ModelAttribute("match") match: Match , bindingResult: BindingResult): String? {
-        matchRepository.save(match)
-        return "/matches"
-    }
+    fun processSignup(@ModelAttribute matchDto: MatchDto , bindingResult: BindingResult): String? {
+        val match = matchRepository.findById(matchDto.id!!).orElse(Match())
 
+        match.description = matchDto.description
+        match.result = matchDto.result
+        match.date = DateUtils.parseDateTime(matchDto.date)
+        match.team1 = teamRepository.findById(matchDto.team1!!.toLong()).orElse(null)
+        match.team2 = teamRepository.findById(matchDto.team2!!.toLong()).orElse(null)
+
+        matchRepository.save(match)
+        return "redirect:/matches"
+    }
 }

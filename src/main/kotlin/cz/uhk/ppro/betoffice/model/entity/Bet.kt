@@ -21,6 +21,6 @@ class Bet(
     var endDate: Date? = null,
     var description: String? = null,
     @ManyToOne
-    @JoinColumn(name = "bet")
+    @JoinColumn(name = "user")
     var user: User? = null
 )

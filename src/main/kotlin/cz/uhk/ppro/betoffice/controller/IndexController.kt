@@ -2,6 +2,7 @@ package cz.uhk.ppro.betoffice.controller
 
 import cz.uhk.ppro.betoffice.model.entity.User
 import cz.uhk.ppro.betoffice.model.repository.UserRepository
+import cz.uhk.ppro.betoffice.util.DateUtils
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -54,16 +55,11 @@ class IndexController(private val userRepository: UserRepository) {
 		val encodedPassword = passwordEncoder.encode(user.password)
 		user.password = encodedPassword
 		user.role = User.ROLE_USER
-		user.birthDate = parseDate(date)
+		user.birthDate = DateUtils.parseDate(date)
 		user.amount = 200
 		System.out.println(user.birthDate)
 		//todo kontrola existujícího emailu
 		userRepository.save(user)
 		return "homepage"
-	}
-
-	private fun parseDate(date: String): Date {
-		val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-		return formatter.parse(date)
 	}
 }
