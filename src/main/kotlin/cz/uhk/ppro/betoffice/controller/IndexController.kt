@@ -10,9 +10,6 @@ import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.Locale
 
 @Controller
 class IndexController(private val userRepository: UserRepository) {
@@ -29,18 +26,12 @@ class IndexController(private val userRepository: UserRepository) {
 
 	@GetMapping("/login")
 	fun login(model: Model): String {
-		model.addAttribute("user", userRepository.findByUsername("tyna"))
 		return "login"
 	}
 
 	@GetMapping("/user/logout")
 	fun logout(model: Model): String {
 		return "logout"
-	}
-
-	@GetMapping("/user/profile")
-	fun profile(model: Model): String {
-		return "profile"
 	}
 
 	@GetMapping("/signup")
