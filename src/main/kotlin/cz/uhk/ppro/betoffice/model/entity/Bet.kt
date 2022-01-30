@@ -5,7 +5,9 @@ import javax.persistence.*
 
 @Entity
 class Bet(
-    @Id @GeneratedValue var id: Long? = null,
+    @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	var id: Long? = null,
 
     @ManyToMany
     var match: List<Match>? = null,

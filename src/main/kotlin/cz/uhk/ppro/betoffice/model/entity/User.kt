@@ -6,7 +6,9 @@ import javax.persistence.*
 
 @Entity
 class User(
-    @Id @GeneratedValue var id: Long? = null,
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	var id: Long? = null,
     var username: String? = null,
     var password: String? = null,
     var email: String? = null,

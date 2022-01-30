@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
 
 @Configuration
@@ -46,17 +47,25 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 
 	//TODO - vylepšit práva + redirect po přihlášení
 	override fun configure(http: HttpSecurity) {
-		System.out.println(passwordEncoder!!.encode("tyna"));
-		http.csrf().disable()
+		http
+			.csrf()
+			.disable()
 			.authorizeRequests()
 			.antMatchers("/login").anonymous()
 			.antMatchers("/user").authenticated()
-			.anyRequest().permitAll()
+			.anyRequest()
+			.permitAll()
 			.and()
 			.formLogin()
 			.loginPage("/login")
+			.defaultSuccessUrl("/user", true)
 			.usernameParameter("username")
 			.passwordParameter("password")
+			.and()
+			.logout()
+			.logoutSuccessUrl("/")
+			.logoutRequestMatcher(AntPathRequestMatcher("/user/logout"))
+			.permitAll()
 			.and()
 			.httpBasic()
 	}
