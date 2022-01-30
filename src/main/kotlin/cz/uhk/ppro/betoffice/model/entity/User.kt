@@ -19,7 +19,7 @@ class User(
     var birthDate: Date? = null,
     var amount: Int? = null,
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     var bet: List<Bet>? = null
 ) {
 	companion object {

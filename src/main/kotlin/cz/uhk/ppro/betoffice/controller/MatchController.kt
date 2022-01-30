@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class MatchController(private val matchRepository: MatchRepository) {
 
-    @GetMapping("/matches")
+    @GetMapping("/user/matches")
     fun matchesList(model: Model): String {
         model.addAttribute("matches", matchRepository.findAll())
         return "matchesList"

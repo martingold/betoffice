@@ -10,9 +10,11 @@ class Match(
     var id: Long? = null,
     
     @OneToOne
+    @JoinColumn(name = "id")
     var team1: Team? = null,
 
     @OneToOne
+    @JoinColumn(name = "id")
     var team2: Team? = null,
 
     var date: Date? = null,
@@ -20,9 +22,15 @@ class Match(
     var result: String? = null,
 
     @OneToOne
+    @JoinColumn(name = "id")
     var stream: Stream? = null,
 
     @ManyToMany
+    @JoinTable(
+        name = "bet_match",
+        joinColumns = [JoinColumn(name = "match")],
+        inverseJoinColumns = [JoinColumn(name = "bet")]
+    )
     var Bet: List<Bet>? = null
 
     )

@@ -10,4 +10,6 @@ class Stream {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	var id: Long? = null
+	var name: String? = null
+	var url: String? = null
 }
