@@ -8,7 +8,7 @@ class Match(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-    
+
     @OneToOne
     @JoinColumn(name = "id")
     var team1: Team? = null,
