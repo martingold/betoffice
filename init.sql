@@ -1,3 +1,4 @@
+SET foreign_key_checks = 0;
 DROP TABLE IF EXISTS `bet`;
 CREATE TABLE `bet` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -92,3 +93,4 @@ INSERT INTO `team` (`name`, `wins`, `loses`, `id`) VALUES
 INSERT INTO `user` (`id`, `amount`, `birth_date`, `created_at`, `email`, `first_name`, `last_name`, `password`, `role`, `username`) VALUES
 (3, 200, '1996-01-01 00:00:00', '2022-01-31 13:36:48', 'admin@example.com', 'Admin', 'Admin', '$2a$10$z8nK0j2l7Sq.RBa8RfeAn.uHC0/NhxXi1bTtgZiuq5gNShY6Pz2ta', 'admin', 'admin'),
 (4, 200, '2022-01-01 00:00:00', '2022-01-31 13:41:08', 'user@example.com', 'User', 'User', '$2a$10$.kRRvy/40dwOx2anZ7nS.e4eTLlK7aonHnliwni6FNRHzufQQE7.a', 'user', 'user');
+SET foreign_key_checks = 1;
