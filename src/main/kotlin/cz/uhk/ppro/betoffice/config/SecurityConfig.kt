@@ -45,14 +45,16 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 					"/js/**");
 	}
 
-	//TODO - vylepšit práva + redirect po přihlášení
 	override fun configure(http: HttpSecurity) {
 		http
 			.csrf()
 			.disable()
 			.authorizeRequests()
-			.antMatchers("/", "/login").permitAll()
-			.anyRequest().authenticated()
+			.antMatchers("/**").permitAll()
+			// TODO: fix auth
+			// Find out why it redirects to /login
+			// .antMatchers("/", "/login").permitAll()
+
 			.and()
 			.formLogin()
 			.loginPage("/login")
