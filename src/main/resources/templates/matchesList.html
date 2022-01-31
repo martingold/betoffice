@@ -6,6 +6,7 @@
 >
 <head>
 	<link media="all" rel="stylesheet" th:href="@{/css/matcheslist.css}" type="text/css"/>
+	<script th:href="@{/js/check.js}"></script>
 	<title>Zápasy</title>
 </head>
 <body>
@@ -13,6 +14,7 @@
 <section layout:fragment="content">
 	<h1 class="h1">Všechny zápasy</h1>
 
+	<form method="post" action="/users/bet">
 	<div class="container" id="main" th:if="${!football.isEmpty()}">
 		<div class="row">
 			<div class="col-sm-8" id="detail">
@@ -27,6 +29,7 @@
 				<td>Tým 1</td>
 				<td>Tým 2</td>
 				<td>Výsledek</td>
+				<td>Vsadit si</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -36,6 +39,9 @@
 				<td th:text="${football.team1.name}"></td>
 				<td th:text="${football.team2.name}"></td>
 				<td th:text="${football.result}"></td>
+				<td th:if="${!football.date.before(#dates.createNow())}">
+					<input type="checkbox" name="accept" class="form-check-input"></td>
+				<td th:unless="${!football.date.before(#dates.createNow())}">Zápas se již odehrál</td>
 			</tr>
 			</tbody>
 		</table>
@@ -55,6 +61,7 @@
 				<td>Tým 1</td>
 				<td>Tým 2</td>
 				<td>Výsledek</td>
+				<td>Vsadit si</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -64,6 +71,9 @@
 				<td th:text="${hockey.team1.name}"></td>
 				<td th:text="${hockey.team2.name}"></td>
 				<td th:text="${hockey.result}"></td>
+				<td th:if="${!hockey.date.before(#dates.createNow())}">
+					<input type="checkbox" name="accept" class="form-check-input"></td>
+				<td th:unless="${!hockey.date.before(#dates.createNow())}">Zápas se již odehrál</td>
 			</tr>
 			</tbody>
 		</table>
@@ -83,6 +93,7 @@
 				<td>Tým 1</td>
 				<td>Tým 2</td>
 				<td>Výsledek</td>
+				<td>Vsadit si</td>
 			</tr>
 			</thead>
 			<tbody>
@@ -92,11 +103,20 @@
 				<td th:text="${match.team1.name}"></td>
 				<td th:text="${match.team2.name}"></td>
 				<td th:text="${match.result}"></td>
+				<td th:if="${!match.date.before(#dates.createNow())}">
+					<input type="checkbox" name="accept" class="form-check-input"></td>
+				<td th:unless="${!match.date.before(#dates.createNow())}">Zápas se již odehrál</td>
 			</tr>
 			</tbody>
 		</table>
 	</div>
 	</div>
+	<div class="container align-content-center" id="show_me">
+		<h1 class="h1">Sázka</h1>
+		<input type="text" placeholder="Vložte prosím částku">
+		<input type="submit">
+	</div>
+</form>
 </section>
 </body>
 </html>

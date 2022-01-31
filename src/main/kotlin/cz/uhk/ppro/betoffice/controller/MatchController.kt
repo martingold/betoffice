@@ -19,7 +19,7 @@ class MatchController(
     private val teamRepository: TeamRepository
 ) {
 
-    @GetMapping("/matches")
+    @GetMapping("user/matches")
     fun matchesList(model: Model): String {
         val matches: Iterable<Match> = matchRepository.findAll()
         val football: MutableList<Match> = mutableListOf()
