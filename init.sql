@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS `bet`;
 CREATE TABLE `bet` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user` bigint(20) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date DEFAULT NULL,
@@ -8,26 +8,26 @@ CREATE TABLE `bet` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `bet_match`;
-CREATE TABLE `bet_match` (
-  `id` bigint(20) NOT NULL,
-  `match` bigint(20) NOT NULL,
-  `bet` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `bet_match_bet_id_fk` (`bet`),
-  KEY `bet_match_match_id_fk` (`match`),
-  CONSTRAINT `bet_match_bet_id_fk` FOREIGN KEY (`bet`) REFERENCES `bet` (`id`),
-  CONSTRAINT `bet_match_match_id_fk` FOREIGN KEY (`match`) REFERENCES `match` (`id`)
+DROP TABLE IF EXISTS `stream`;
+CREATE TABLE `stream` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) NOT NULL,
+  `url` varchar(300) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `hibernate_sequence`;
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint(20) DEFAULT NULL
+DROP TABLE IF EXISTS `team`;
+CREATE TABLE `team` (
+  `name` varchar(30) NOT NULL,
+  `wins` int(11) DEFAULT NULL,
+  `loses` int(11) DEFAULT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `match`;
 CREATE TABLE `match` (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `team1` bigint(20) NOT NULL,
   `team2` bigint(20) NOT NULL,
   `date` datetime NOT NULL,
@@ -43,21 +43,22 @@ CREATE TABLE `match` (
   CONSTRAINT `stream___fk` FOREIGN KEY (`stream`) REFERENCES `stream` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `stream`;
-CREATE TABLE `stream` (
-  `id` bigint(20) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `url` varchar(300) NOT NULL,
-  PRIMARY KEY (`id`)
+
+DROP TABLE IF EXISTS `bet_match`;
+CREATE TABLE `bet_match` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `match` bigint(20) NOT NULL,
+  `bet` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bet_match_bet_id_fk` (`bet`),
+  KEY `bet_match_match_id_fk` (`match`),
+  CONSTRAINT `bet_match_bet_id_fk` FOREIGN KEY (`bet`) REFERENCES `bet` (`id`),
+  CONSTRAINT `bet_match_match_id_fk` FOREIGN KEY (`match`) REFERENCES `match` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `team`;
-CREATE TABLE `team` (
-  `name` varchar(30) NOT NULL,
-  `wins` int(11) DEFAULT NULL,
-  `loses` int(11) DEFAULT NULL,
-  `id` bigint(20) NOT NULL,
-  PRIMARY KEY (`id`)
+DROP TABLE IF EXISTS `hibernate_sequence`;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `user`;
