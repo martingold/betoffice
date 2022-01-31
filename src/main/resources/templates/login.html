@@ -13,6 +13,11 @@
 			<div class="card">
 				<form th:action="@{/login}" method="post" class="box">
 					<h1>Přihlásit se</h1>
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">
+							Neplatné jméno nebo heslo
+						</div>
+					</div>
 					<p class="text-muted">Vložte uživatelské jméno a heslo</p>
 					<input type="text" name="username" placeholder="Uživatelské jméno">
 					<input type="password" name="password" placeholder="Heslo">

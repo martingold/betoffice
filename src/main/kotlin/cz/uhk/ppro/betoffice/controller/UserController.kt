@@ -2,9 +2,7 @@ package cz.uhk.ppro.betoffice.controller
 
 import cz.uhk.ppro.betoffice.dto.UserDto
 import cz.uhk.ppro.betoffice.model.repository.UserRepository
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -22,7 +20,7 @@ class UserController(
     fun profile(model: Model): String {
 		val auth = SecurityContextHolder.getContext().authentication
 		val username = auth.name
-		val user = userRepository.findByUsername(username).orElseThrow{ UsernameNotFoundException("") }
+		val user = userRepository.findByEmail(username).orElseThrow{ UsernameNotFoundException("") }
 		model.addAttribute("user", user)
         return "profileForm"
     }
