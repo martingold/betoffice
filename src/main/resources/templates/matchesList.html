@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
 		xmlns:th="http://www.thymeleaf.org"
-		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
 		layout:decorate="~{layout.html}"
 >
 <head>
@@ -12,9 +12,11 @@
 <body>
 
 <section layout:fragment="content">
+	<button class="btn btn-success" sec:authorize="hasRole('ROLE_USER')">
+		<a th:href="@{/create-match}" class="text-white">Přidat nový zápas</a>
+	</button>
 	<h1 class="h1">Všechny zápasy</h1>
-
-	<form method="post" action="/users/bet">
+	<form method="post" action="/user/bet">
 	<div class="container" id="main" th:if="${!football.isEmpty()}">
 		<div class="row">
 			<div class="col-sm-8" id="detail">
@@ -30,6 +32,7 @@
 				<td>Tým 2</td>
 				<td>Výsledek</td>
 				<td>Vsadit si</td>
+				<td></td>
 			</tr>
 			</thead>
 			<tbody>
@@ -42,6 +45,9 @@
 				<td th:if="${!football.date.before(#dates.createNow())}">
 					<input type="checkbox" name="accept" class="form-check-input"></td>
 				<td th:unless="${!football.date.before(#dates.createNow())}">Zápas se již odehrál</td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success">
+					<a th:href="@{'/edit-match/' + ${football.id}}" class="text-white">Upravit</a></button></td>
+
 			</tr>
 			</tbody>
 		</table>
@@ -74,6 +80,7 @@
 				<td th:if="${!hockey.date.before(#dates.createNow())}">
 					<input type="checkbox" name="accept" class="form-check-input"></td>
 				<td th:unless="${!hockey.date.before(#dates.createNow())}">Zápas se již odehrál</td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${hockey.id}}" class="text-white">Upravit</a></button></td>
 			</tr>
 			</tbody>
 		</table>
@@ -106,6 +113,7 @@
 				<td th:if="${!match.date.before(#dates.createNow())}">
 					<input type="checkbox" name="accept" class="form-check-input"></td>
 				<td th:unless="${!match.date.before(#dates.createNow())}">Zápas se již odehrál</td>
+				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${match.id}}" class="text-white">Upravit</a></button></td>
 			</tr>
 			</tbody>
 		</table>

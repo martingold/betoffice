@@ -42,7 +42,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 			web.ignoring()
 				.antMatchers(
 					"/css/**", "/fonts/**",
-					"/js/**");
+					"/js/**", "/assets/**");
 	}
 
 	override fun configure(http: HttpSecurity) {

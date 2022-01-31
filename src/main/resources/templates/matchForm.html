@@ -14,6 +14,8 @@
     <div class="container" id="main">
 		<div class="row">
 			<div class="col-sm-12">
+				<a href="/user/matches" class="btn btn-success">Zpět</a>
+				<br>
 				<form th:action="@{/save-match}" th:object="${match}" method="post" class="box">
 					<h1 th:if="${create} == true">Vložit zápas</h1>
 					<h1 th:unless="${create} == true">Upravit zápas</h1>
@@ -21,7 +23,7 @@
 					<div class="mb-3">
 						<input th:unless="${create} == true" id="id" th:field="*{id}" type="hidden"/>
 						<label class="form-label">Datum</label>
-						<input class="form-control" type="datetime-local" th:field="*{date}" placeholder="Datum" required>
+						<input class="form-control" type="datetime-local" th:field="*{date}" placeholder="Datum" th:selected="${match.date}" required>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Popis</label>
@@ -30,21 +32,21 @@
 					<div class="mb-3">
 						<label class="form-label">První tým</label>
 						<select class="form-select" th:field="*{team1}" required>
-							<option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}"></option>
+							<option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}" th:selected="${teams == match.team1}"></option>
 						</select>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Druhý tým</label>
 						<select class="form-select" th:field="*{team2}" required>
-							<option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}"></option>
+							<option th:each="t : ${teams}" th:value="${t.id}" th:text="${t.name}" th:selected="${teams == match.team2}"></option>
 						</select>
 					</div>
 					<div class="mb-3">
 						<label class="form-label">Výsledek</label>
-						<input class="form-control" type="text" th:field="*{result}" placeholder="Výsledek" required>
+						<input class="form-control" type="text" th:field="*{result}" placeholder="Výsledek">
 					</div>
 					<div>
-						<input type="submit" name="login-submit" value="Upravit" class="btn btn-primary">
+						<input type="submit" name="login-submit" value="Upravit" class="btn btn-success">
 					</div>
 				</form>
 			</div>
