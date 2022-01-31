@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping
 class UserController(
 	private val userRepository: UserRepository
 ) {
+	@GetMapping("/user/detail")
+	fun detail(model: Model): String {
+		val auth = SecurityContextHolder.getContext().authentication
+		val username = auth.name
+		model.addAttribute("user", userRepository.findByEmail(username).get())
+		return "profile"
+	}
 
 	@GetMapping("/user/profile")
     fun profile(model: Model): String {
@@ -27,7 +34,13 @@ class UserController(
 
 	@PostMapping("/user/profile")
 	fun saveProfile(@ModelAttribute userDto: UserDto, bindingResult: BindingResult): String {
-		return "p"
+		val auth = SecurityContextHolder.getContext().authentication
+		val username = auth.name
+		val user = userRepository.findByEmail(username).get()
+		user.username = userDto.username
+		user.email = userDto.email
+		user.amount = userDto.amount
+		return "redirect:/"
 	}
 
 }

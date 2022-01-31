@@ -31,6 +31,8 @@
                 <td th:text="${team.name}"></td>
                 <td th:text="${team.wins}"></td>
                 <td th:text="${team.loses}"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success">
+                    <a th:href="@{'/edit-team/' + ${team.id}}" class="text-white">Upravit</a></button></td>
             </tr>
             </tbody>
         </table>

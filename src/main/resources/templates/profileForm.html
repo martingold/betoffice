@@ -12,32 +12,30 @@
 <body>
 <section layout:fragment="content">
 	<div class="container" id="main">
-		<form th:action="@{/save-match}" th:object="${user}" method="post" class="box">
+		<form th:action="@{/user/profile}" th:object="${user}" method="post" class="box">
 			<h1>Upravit profil</h1>
 			<table class="table">
-				<thead>
 				<tr>
-					<td>Datum</td>
-					<td>#</td>
-					<td>Tým 1</td>
-					<td>Tým 2</td>
-					<td>Výsledek</td>
-					<td></td>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>
-						<input type="text" th:field="*{username}" placeholder="Uživatelské jméno" required></td>
-					</td>
-					<td>
-						<input type="text" th:field="*{email}" placeholder="E-mail" required></td>
-					</td>
+				<div class="mb-3">
+					<label class="form-label">Jméno</label>
+					<input class="form-control" type="text" th:field="*{firstName}" placeholder="Jméno" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Příjmení</label>
+					<input class="form-control" type="text" th:field="*{lastName}" placeholder="Příjmení" required>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Email</label>
+					<input class="form-control" type="text" th:field="*{email}" placeholder="Email">
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Částka</label>
+					<input class="form-control" type="text" th:field="*{amount}" placeholder="Částka">
+				</div>
 					<td>
 						<input type="submit" name="login-submit" value="Upravit">
 					</td>
 				</tr>
-				</tbody>
 			</table>
 		</form>
 	</div>

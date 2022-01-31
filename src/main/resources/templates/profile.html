@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{layout.html}"
+>
+<head>
+    <link media="all" rel="stylesheet" th:href="@{/css/profile.css}" type="text/css"/>
+    <title>Profil</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+    <table class="table">
+        <tr>
+            <div class="mb-3">
+                <label class="form-label">Jméno: </label>
+                <span th:text="${user.firstName}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Příjmení: </label>
+                <span th:text="${user.lastName}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email|: </label>
+                <span th:text="${user.email}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Uživatelské jméno: </label>
+                <span th:text="${user.username}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Datum narození: </label>
+                <span th:text="${user.birthDate}"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Částka: </label>
+                <span th:text="${user.amount}"></span>
+            </div>
+        </tr>
+    </table>
+</section>
+</body>
+</html>

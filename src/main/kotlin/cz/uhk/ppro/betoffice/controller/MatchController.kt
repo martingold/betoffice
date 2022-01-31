@@ -19,7 +19,7 @@ class MatchController(
     private val teamRepository: TeamRepository
 ) {
 
-    @GetMapping("user/matches")
+    @GetMapping("/user/matches")
     fun matchesList(model: Model): String {
         val matches: Iterable<Match> = matchRepository.findAll()
         val football: MutableList<Match> = mutableListOf()
@@ -60,7 +60,7 @@ class MatchController(
     }
 
     @PostMapping("/save-match")
-    fun processSignup(@ModelAttribute matchDto: MatchDto , bindingResult: BindingResult): String? {
+    fun processSignup(@ModelAttribute matchDto: MatchDto, bindingResult: BindingResult): String? {
         val match = matchRepository.findById(matchDto.id!!).orElse(Match())
 
         match.description = matchDto.description
@@ -70,6 +70,6 @@ class MatchController(
         match.team2 = teamRepository.findById(matchDto.team2!!.toLong()).orElse(null)
 
         matchRepository.save(match)
-        return "redirect:/matches"
+        return "redirect:/user/matches"
     }
 }
