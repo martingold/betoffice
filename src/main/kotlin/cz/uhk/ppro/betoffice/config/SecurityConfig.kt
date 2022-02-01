@@ -50,11 +50,8 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 			.csrf()
 			.disable()
 			.authorizeRequests()
-			.antMatchers("/**").permitAll()
-			// TODO: fix auth
-			// Find out why it redirects to /login
-			// .antMatchers("/", "/login").permitAll()
-			.antMatchers("/user").authenticated()
+			.antMatchers("/", "/login","/signup").permitAll()
+			.anyRequest().authenticated()
 			.and()
 			.formLogin()
 			.loginPage("/login")

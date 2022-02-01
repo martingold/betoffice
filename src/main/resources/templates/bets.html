@@ -10,31 +10,24 @@
         </head>
 <body>
 <section layout:fragment="content">
-    <h1 class="h1">Všechny Týmy</h1>
-
+    <h1 class="h1">Mé sázky</h1>
     <div class="container" id="main">
-        <div class="row">
-            <div class="col-sm-8" id="detail">
-                <h2 id="shawn"><b>Týmy</b></h2>
-            </div>
-        </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="b : ${bets}">
-                <td th:text="${b.startDate}"></td>
-                <td th:text="${b.endDate}"></td>
-                <td th:text="${b.description}"></td>
-            </tr>
-            </tbody>
+        <div th:each="bet : ${bets}">
+            <p class="text-white" th:text="${bet.startDate}">
+            </p>
+            <p class="text-white">Částka: </p>
+            <p class="text-white" th:text="${bet.description}"></p>
+            <table class="table">
+               <tr th:each="ma : ${bet.match}">
+                    <td th:text="${ma.date}"></td>
+                    <td th:text="${ma.description}"></td>
+                    <td th:text="${ma.team1.name}"></td>
+                    <td th:text="${ma.team2.name}"></td>
+                    <td th:text="${ma.stream.url}"></td>
+               </tr>
+          </span>
         </table>
+        </div>
     </div>
 </section>
 </body>

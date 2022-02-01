@@ -46,12 +46,9 @@ class BetController(
 
 	@GetMapping("/user/my-bets")
 	fun list(model: Model): String {
-		var auth = SecurityContextHolder.getContext().getAuthentication();
-		val principal = auth.getPrincipal();
-		if (principal !is UserDetails) {
-			throw Exception("User not logged in");
-		}
-		val user = userRepository.findByUsername(principal.username).orElseThrow { UsernameNotFoundException("") }
+		val auth = SecurityContextHolder.getContext().authentication
+		val username = auth.name
+		val user = userRepository.findByEmail(username).orElseThrow { UsernameNotFoundException("") }
 		model.addAttribute("bets", betRepository.findAllByUser(user));
 		return "bets"
 
