@@ -54,7 +54,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter(){
 			// TODO: fix auth
 			// Find out why it redirects to /login
 			// .antMatchers("/", "/login").permitAll()
-
+			.antMatchers("/user").authenticated()
 			.and()
 			.formLogin()
 			.loginPage("/login")

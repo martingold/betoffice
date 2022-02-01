@@ -1,5 +1,6 @@
 package cz.uhk.ppro.betoffice.model.entity
 
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
 
@@ -17,7 +18,7 @@ class Bet(
     )
     var match: List<Match>? = null,
 
-    var startDate: Date? = null,
+    var startDate: Date? = Calendar.getInstance().time,
     var endDate: Date? = null,
     var description: String? = null,
     @ManyToOne

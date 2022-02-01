@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml"
+        layout:decorate="~{layout.html}"
+>
+<head>
+    <link media="all" rel="stylesheet" th:href="@{/css/matcheslist.css}" type="text/css"/>
+    <script th:href="@{/js/check.js}"></script>
+    <title>Vsadit si</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+    <form method="post" th:action="@{/user/bet}" th:object="${bet}">
+        <div class="container" id="main">
+            <div class="row">
+                <div class="col-sm-8" id="detail">
+                    <h2 id="shawn"><b>Vsadit si</b></h2>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <td>Datum</td>
+                    <td>#</td>
+                    <td>Tým 1</td>
+                    <td>Tým 2</td>
+                    <td>Vsadit si</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="m : ${matches}">
+                    <td th:text="${m.date}"></td>
+                    <td th:text="${m.description}"></td>
+                    <td th:text="${m.team1.name}"></td>
+                    <td th:text="${m.team2.name}"></td>
+                    <td th:if="${!m.date.before(#dates.createNow())}">
+                        <input type="checkbox" th:field="*{match}" th:value="${m.id}" name="accept" class="form-check-input"></td>
+                    <td th:unless="${!m.date.before(#dates.createNow())}">Zápas se již odehrál</td>
+                 </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="container align-content-center" id="show_me">
+            <h1 class="h1">Sázka</h1>
+            <input type="number" placeholder="Vložte prosím částku" name="amount" required>
+            <input type="submit">
+        </div>
+    </form>
+</section>
+</body>
+</html>
