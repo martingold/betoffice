@@ -3,6 +3,7 @@ package cz.uhk.ppro.betoffice.controller
 import cz.uhk.ppro.betoffice.dto.MatchDto
 import cz.uhk.ppro.betoffice.model.entity.Match
 import cz.uhk.ppro.betoffice.model.repository.MatchRepository
+import cz.uhk.ppro.betoffice.model.repository.StreamRepository
 import cz.uhk.ppro.betoffice.model.repository.TeamRepository
 import cz.uhk.ppro.betoffice.util.DateUtils
 import org.springframework.http.HttpStatus
@@ -11,16 +12,19 @@ import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
+import java.security.Principal
 
 
 @Controller
 class MatchController(
     private val matchRepository: MatchRepository,
-    private val teamRepository: TeamRepository
+    private val teamRepository: TeamRepository,
+    private val streamRepository: StreamRepository,
 ) {
 
     @GetMapping("/user/matches")
-    fun matchesList(model: Model): String {
+    fun matchesList(model: Model, principal: Principal): String {
+		var pr = principal
         val matches: Iterable<Match> = matchRepository.findAll()
         val football: MutableList<Match> = mutableListOf()
         val hockey: MutableList<Match> = mutableListOf()
@@ -60,14 +64,21 @@ class MatchController(
     }
 
     @PostMapping("/save-match")
-    fun processSignup(@ModelAttribute matchDto: MatchDto, bindingResult: BindingResult): String? {
-        val match = matchRepository.findById(matchDto.id!!).orElse(Match())
+    fun saveMatch(@ModelAttribute matchDto: MatchDto, bindingResult: BindingResult): String? {
+		println(matchDto.id)
+		var match = if (matchDto.id !== null) {
+			matchRepository.findById(matchDto.id!!).get()
+		} else {
+			Match()
+		}
 
         match.description = matchDto.description
         match.result = matchDto.result
         match.date = DateUtils.parseDateTime(matchDto.date)
         match.team1 = teamRepository.findById(matchDto.team1!!.toLong()).orElse(null)
         match.team2 = teamRepository.findById(matchDto.team2!!.toLong()).orElse(null)
+
+
 
         matchRepository.save(match)
         return "redirect:/user/matches"

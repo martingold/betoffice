@@ -44,7 +44,7 @@ class TeamController(private val teamRepository: TeamRepository) {
 
     @PostMapping("/save-team")
     fun processSignup(@ModelAttribute teamDto: TeamDto, bindingResult: BindingResult): String? {
-        val team = teamRepository.findById(teamDto.id!!).orElse(Team())
+        val team = if (teamDto.id !== null) teamRepository.findById(teamDto.id!!).get() else Team()
         team.name = teamDto.name
         team.loses = teamDto.loses
         team.wins = teamDto.wins

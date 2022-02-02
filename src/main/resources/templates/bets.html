@@ -23,7 +23,7 @@
                     <td th:text="${ma.description}"></td>
                     <td th:text="${ma.team1.name}"></td>
                     <td th:text="${ma.team2.name}"></td>
-                    <td th:text="${ma.stream.url}"></td>
+                    <td th:if="${ma.stream} != null" th:text="${ma.stream.url}"></td>
                </tr>
           </span>
         </table>

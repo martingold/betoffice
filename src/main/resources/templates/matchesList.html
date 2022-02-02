@@ -12,7 +12,7 @@
 <body>
 
 <section layout:fragment="content">
-	<button class="btn btn-success" sec:authorize="hasRole('ROLE_USER')">
+	<button class="btn btn-success">
 		<a th:href="@{/create-match}" class="text-white">Přidat nový zápas</a>
 	</button>
 	<h1 class="h1">Všechny zápasy</h1>
@@ -40,8 +40,8 @@
 				<td th:text="${football.team1.name}"></td>
 				<td th:text="${football.team2.name}"></td>
 				<td th:text="${football.result}"></td>
-				<td><a th:href="${football.stream.url}">Sledovat stream</a></td>
-				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success">
+				<td><a th:if="${football.stream} != null" th:href="${football.stream.url}">Sledovat stream</a></td>
+				<td><button class="btn btn-success">
 					<a th:href="@{'/edit-match/' + ${football.id}}" class="text-white">Upravit</a></button></td>
 			</tr>
 			</tbody>
@@ -72,8 +72,8 @@
 				<td th:text="${hockey.team1.name}"></td>
 				<td th:text="${hockey.team2.name}"></td>
 				<td th:text="${hockey.result}"></td>
-				<td><a th:href="${hockey.stream.url}">Sledovat stream</a></td>
-				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${hockey.id}}" class="text-white">Upravit</a></button></td>
+				<td><a th:if="${hockey.stream} != null" th:href="${hockey.stream.url}">Sledovat stream</a></td>
+				<td><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${hockey.id}}" class="text-white">Upravit</a></button></td>
 			</tr>
 			</tbody>
 		</table>
@@ -103,8 +103,8 @@
 				<td th:text="${match.team1.name}"></td>
 				<td th:text="${match.team2.name}"></td>
 				<td th:text="${match.result}"></td>
-				<td><a th:href="${match.stream.url}">Sledovat stream</a></td>
-				<td sec:authorize="hasRole('ROLE_ADMIN')"><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${match.id}}" class="text-white">Upravit</a></button></td>
+				<td><a th:if="${match.stream} != null" th:href="${match.stream.url}">Sledovat stream</a></td>
+				<td><button class="btn btn-success"><a th:href="@{'/edit-match/' + ${match.id}}" class="text-white">Upravit</a></button></td>
 			</tr>
 			</tbody>
 		</table>
