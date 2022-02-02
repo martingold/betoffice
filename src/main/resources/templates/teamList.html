@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html
 		xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{layout.html}"
 >
@@ -11,6 +12,9 @@
 <body>
 <section layout:fragment="content">
     <h1 class="h1">Všechny Týmy</h1>
+
+    <button class="btn btn-success" sec:authorize="hasRole('ROLE_ADMIN')">
+        <a th:href="@{/create-team}" class="text-white">Vytvořit tým</a></button>
 
     <div class="container" id="main">
         <div class="row">
